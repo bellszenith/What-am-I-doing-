@@ -1,5 +1,7 @@
 def instructions():
-    print('Use the directions North, South, East and West to move between rooms.')
+    print(
+        'Use the directions North, South, East and West to move between rooms.'
+    )
 
 
 def show_status(current_room):
@@ -10,27 +12,31 @@ def show_status(current_room):
 
 def main():
     rooms = {
-        'Great Hall': {'South': 'Bedroom'},
-        'Bedroom': {'North': 'Great Hall', 'East': 'Cellar'},
-        'Cellar': {'West': 'Bedroom'}
+        'Great Hall': {
+            'South': 'Bedroom'
+        },
+        'Bedroom': {
+            'North': 'Great Hall',
+            'East': 'Cellar'
+        },
+        'Cellar': {
+            'West': 'Bedroom'
+        }
     }
     current_room = 'Great Hall'
     instructions()
-    show_status(current_room)
-    next_move = input('Enter the direction you would like to go\n')
+    while (True):
+        show_status(current_room)
+        next_move = input('Enter the direction you would like to go\n')
+        desired_room = rooms.get(current_room).get(next_move)
 
-    while rooms.get(current_room, {}):
-        if current_room == None:
+        if desired_room == None:
             print('You can not go that way!')
-            break
         elif next_move == 'Quit':
             exit('Thank you for exploring!!')
         else:
             print('You have entered', next_move)
-
-        current_room = rooms.get(current_room, {}).get(next_move)
-        show_status(current_room)
-        next_move = input('Enter the direction you would like to go\n')
+            current_room = desired_room
 
 
 main()
